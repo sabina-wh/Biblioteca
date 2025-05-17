@@ -5,8 +5,8 @@ Las vistas permiten realizar :
 *Pagina de inicio
 *Registro de  Autor, Libro y Editor
 *Mostrar Autores, Libros y Editores
-*Actualizar los datos de Autor, Libro Y Editor
-*Eliminar los datos de Autor, Libro Y Editor
+*Actualizar los datos de Autor, Libro y Editor
+*Eliminar los datos de Autor, Libro y Editor
 *Formulario de contacto
 
 Fue diseñada con Python 3.7 y Django 1.9 utilizando SQlite para la Base de Datos
