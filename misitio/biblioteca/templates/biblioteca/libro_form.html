@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Registrar Libro</h2>
+<br>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+	<form class="" method="post" enctype="multipart/form-data" novalidate>
+		{% csrf_token %}
+		{{ form.as_p }}
+      <button class="btn-info-enviar" type="submit"> Guardar</button>
+	</form>
+   <!-- { load static %}
+    <script type="text/javascript" src="{ static 'js/calendario.js' %}"></script>
+    <script type="text/javascript" src="{ static 'js/select2.js' %}"></script>-->
+{% endblock %}

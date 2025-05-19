@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Eliminar Autor</h2>
+<form method="post">
+	{% csrf_token %}
+	<h3> ¿Deseas borrar el registro: {{autores.nombre}}?</h3>
+	<button class="btm btn-danger" type="submit">Confirmar</button>
+	<a class="btn btn-default" href="{% url 'editores_mostrar' %}">Cancelar</a>
+</form>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+<br>
+{% block content %}
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <br>
+<h2>Lista de Autores Funciones</h2>
+
+<div>
+  <form class="d-flex">
+   <input class="form-control me-sm-2" type="search" placeholder="Ingresa tu busqueda"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+</div>
+    <br>
+
+<table class="table table-hover">
+
+    <thead>
+     <tr class="titletabla">
+        <td>Apellidos</td>
+        <td>Nombre</td>
+        <td>Correo electronico</td>
+        <td>ID</td>
+     </tr>
+    </thead>
+    <tbody>
+    {% if autores %}
+    {% for autor in autores %}
+    <tr>
+        <td>{{ autor.apellidos}}</td>
+        <td>{{ autor.nombre }}</td>
+        <td>{{ autor.email}}</td>
+        <td>{{ autor.id }}</td>
+        <td>
+            <a class="btn btn-warning" href="{% url 'autores_editar' autor.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'autores_borrar' autor.id %}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <h3>No se encontraron registros de autores</h3>
+    {% endif %}
+    {% endblock %}
+    </tbody>
+</table>

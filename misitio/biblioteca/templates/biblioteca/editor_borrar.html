@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2> Eliminar Editores utilizando CBV </h2>
+<form method="post">
+	{% csrf_token %}
+	<p> ¿Deseas eliminar el registro: {{object.nombre}}?</p>
+	<button class="btm btn-danger" type="submit">Confirmar</button>
+	<a class="btn btn-default" href="{% url 'editores_listar' %}">Cancelar</a>
+</form>
+
+{% endblock %}

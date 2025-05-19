@@ -1,0 +1,13 @@
+<p> Termino de busqueda: <strong> {{ query }}</strong></p>
+
+{% if libros %}
+    <!--length la cantidad de libros pluralize: añade una s si es mayor 1 -->
+ <p>Libros encontrados: {{ libros|length }} libro {{ libros|pluralize }}.</p>
+<ul>
+    {%  for libros in libros %}
+    <li>{{ libros.titulo }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No se encontraron libros que coincidan con el termino de búsqueda</p>
+{% endif %}

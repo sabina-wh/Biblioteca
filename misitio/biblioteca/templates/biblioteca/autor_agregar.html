@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h2>Registra Autor</h2>
+
+{% if form.errors %}
+<p class="errorlist">Por favor,Corrige los siguientes datos :</p>
+{% endif %}
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    <div class="field">
+    {{ form.nombre.errors }}
+    <label for="id_nombre_autor">Nombre:</label>
+        {{ form.nombre }}
+    </div>
+    <div class="field">
+    {{ form.apellidos.errors }}
+    <label for="id_apellidos">Apellidos:</label>
+        {{ form.apellidos }}
+    </div>
+    <div class="field">
+    {{ form.email.errors }}
+    <label for="id_email">Correo Electronico:</label>
+        {{ form.email }}
+    </div>
+
+<input type="submit" value="Enviar">
+</form>
+{% endblock %}

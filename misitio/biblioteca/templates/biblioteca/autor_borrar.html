@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2> Eliminar Autores Clases </h2>
+<form method="post">
+	{% csrf_token %}
+	<p> ¿Deseas eliminar el registro: {{object.autor}}?</p>
+	<button class="btm btn-danger" type="submit">Confirmar</button>
+	<a class="btn btn-default" href="{% url 'autores_listar' %}">Cancelar</a>
+</form>
+
+{% endblock %}

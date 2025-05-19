@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h2>Agregar Libro</h2>
+
+<form action="" enctype="multipart/form-data" method="post" novalidate>
+    {% csrf_token %}
+    <div class="field">
+    {{ form.titulo.errors }}
+    <label for="id_titulo">Titulo:</label>
+        {{ form.titulo }}
+    </div>
+    <div class="field">
+    {{ form.autores.errors }}
+    <label for="id_nombre_autor">Autores:</label>
+        {{ form.autores }}
+    </div>
+    <div class="field">
+    {{ form.editor.errors }}
+    <label for="id_nombre_editor">Editor:</label>
+        {{ form.editor}}
+    </div>
+    <div class="field">
+    {{ form.fecha_publicacion.errors }}
+    <label for="id_fecha_publicacion">Fecha de Publicacion:</label>
+        {{ form.fecha_publicacion }}
+    </div>
+    <div class="field">
+    {{ form.portada.errors }}
+    <label for="id_pais">Portada:</label>
+        {{ form.portada }}
+    </div>
+<input type="submit" value="Enviar">
+</form>
+
+{% if form.errors %}
+    <div class="error-summary">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}

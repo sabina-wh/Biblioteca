@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h2>Lista de Libros Clases</h2>
+
+<div>
+  <form class="d-flex">
+   <input class="form-control me-sm-2" type="search" placeholder="Buscar"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+</div>
+
+<table class="table table-hover">
+
+    <thead>
+     <tr class="titletabla">
+        <td>No.</td>
+        <td>Titulo</td>
+        <td>Autores:</td>
+        <td>Editor</td>
+        <td>Fecha Publicacion</td>
+        <td>Portada</td>
+     </tr>
+    </thead>
+    <tbody>
+    {% if object_list %}
+    {% for libro in object_list %}
+    <tr>
+        <td>{{ libro.id }}</td>
+        <td>{{ libro.titulo }}</td>
+    <!--Autores es una relacion ManyToMany-->
+        <td>
+        <!-- Recorre todos los autores que contiene el libro -->
+        {% for autor in libro.autores.all %}
+        {{ autor.nombre }} {{ autor.apellidos }}
+            <!-- forloop.last es una bandera booleana (True o False) -->
+            <!-- si la iteración actual es la última dentro del bucle -->
+            <!-- evitar colocar una coma, separador o etiqueta extra después del último elemento en un bucle-->
+            {% if not forloop.last %}&
+            {% endif %}
+        {% empty %}
+        No se encontraron Autores asociados a este libro
+        {% endfor %}
+        <td>{{ libro.editor }}</td>
+        <td>{{ libro.fecha_publicacion }}</td>
+        <td>
+            {% if libro.portada %}
+                <img class="img-libro" src="{{ libro.portada.url }}" alt="Portada-libro" />
+                {% else %}
+                <img class="img-libro" src="{{ MEDIA_URL }}portadas/default.png" alt="No se encontro imagen" />
+                {% endif %}
+        </td>
+      <td>
+            <a class="btn btn-warning" href="{% url 'libros_editar' libro.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'libros_borrar' libro.id %}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <h3>No se encontraron Libros </h3>
+    {% endif %}
+    {% endblock %}
+    </tbody>
+</table>

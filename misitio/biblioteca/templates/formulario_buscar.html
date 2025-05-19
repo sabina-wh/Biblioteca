@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/../../contactos/static/contactos/styles.css' %}">
+</head>
+<body>
+<h1>Busqueda de libros</h1>
+<!--{if error }
+        <p class="error">Por favor, introduce el termino de busqueda</p>
+    {endif}-->
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li class="errorlist"> {{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+  <form action="/buscar/" method="get">
+      <p>Ingresa el titulo del libro</p>
+      <input type ="text" name="q">
+      <input type="submit" value="Buscar">
+  </form>
+</body>
+</html>

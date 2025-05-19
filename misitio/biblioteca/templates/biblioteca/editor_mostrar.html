@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+<br>
+{% block content %}
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <br>
+<h2>Lista de Editores Funciones</h2>
+
+<div>
+  <form class="d-flex">
+   <input class="form-control me-sm-2" type="search" placeholder="Ingresa tu busqueda"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+</div>
+    <br>
+
+<table class="table table-hover">
+
+    <thead>
+     <tr class="titletabla">
+        <td>No.</td>
+        <td>Nombre</td>
+        <td>Domicilio:</td>
+        <td>Ciudad</td>
+        <td>Estado</td>
+        <td>Pais</td>
+        <td>Sitio Web</td>
+     </tr>
+    </thead>
+    <tbody>
+    {% if editores %}
+    {% for editor in editores %}
+    <tr>
+        <td>{{ editor.id }}</td>
+        <td>{{ editor.nombre }}</td>
+        <td>{{ editor.domicilio }}</td>
+        <td>{{ editor.ciudad }}</td>
+        <td>{{ editor.estado }}</td>
+        <td>{{ editor.pais }}</td>
+        <td>{{ editor.website }}</td>
+
+        <td>
+
+            <a class="btn btn-warning" href="{% url 'editores_editar' editor.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'editores_borrar' editor.id %}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <h3>No se encontraron registros de editores</h3>
+    {% endif %}
+    {% endblock %}
+    </tbody>
+</table>

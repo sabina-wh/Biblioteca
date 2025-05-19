@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Contactanos</h1>
+{% if forms.error %}
+<p class="errorlist"> POr favor corrige lo siguiente:</p>
+{% endif %}
+<form action="" method="post">{% csrf_token %}
+ <div class="field">
+     {{ form.asunto.errors }}
+     <p>
+     <label for="id_asunto">Asunto:</label>
+     {{ form.asunto }}
+     </p>
+ </div>
+ <div class="field">
+     {{ form.email.errors }}
+     <p>
+         <label for="id_email">Email:</label>
+         {{ form.email }}
+     </p>
+ </div>
+ <div class="field">
+     {{ form.mensaje.errors }}
+     <p> <label for="id_mensaje">Escribe tu mensaje:</label>
+                    {{ form.mensaje }}
+      </p>
+ </div>
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}
+
+<!---
+{if errors}
+    <ul>
+        {for error in errors}
+        <li> { error }</li>
+        {endfor }
+    </ul>
+{endif}-->
+<!--
+<form action="/contactos/" method="post">{csrf_token}
+    <p>Asunto:<input type="text" name="asunto" value="{asunto}"></p>
+    <p>E-mail(opcional):<input type="text" name="email" value="{email}}"></p>
+    <p>Mensaje: <textarea name="mensaje" rows="10" cols="50" value="{mensaje}}"></textarea></p>
+    <input type="submit" value="Enviar">
+</form>-->

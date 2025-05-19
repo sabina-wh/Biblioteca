@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+<br>
+{% block content %}
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <br>
+<h2>Lista de Libros Funciones</h2>
+
+<div>
+  <form class="d-flex">
+   <input class="form-control me-sm-2" type="search" placeholder="Ingresa tu busqueda"><button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+</div>
+    <br>
+
+<table class="table table-hover">
+
+    <thead>
+     <tr class="titletabla">
+        <td>No.</td>
+        <td>Titulo</td>
+        <td>Autores</td>
+        <td>Editor</td>
+        <td>fecha publicacion</td>
+        <td>Portada</td>
+     </tr>
+    </thead>
+    <tbody>
+    {% if libros %}
+    {% for libro in libros %}
+    <tr>
+        <td>{{ libro.id }}</td>
+        <td>{{ libro.titulo }}</td>
+        <td>
+            {% for autor in libro.autores.all %}
+        {{ autor.nombre }} {{ autor.apellidos }}
+            {% if not forloop.last %},
+            {% endif %}
+        {% empty %}
+        Sin Autores registrados
+        {% endfor %}
+        </td>
+        <td>{{ libro.editor }}</td>
+        <td>{{ libro.fecha_publicacion }}</td>
+        <td>
+                {% if libro.portada %}
+                <img class="img-libro" src="{{ libro.portada.url }}" alt="Portada-libro" />
+                {% else %}
+                <img class="img-libro" src="{{ MEDIA_URL }}portadas/default.png" alt="No se encontro imagen" />
+                {% endif %}
+        </td>
+
+        <td>
+
+            <a class="btn btn-warning" href="{% url 'libros_editar' libro.id %}">Editar</a>
+            <a class="btn btn-danger" href="{% url 'libros_borrar' libro.id %}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+{% else %}
+    <h3>No se encontraron registros de Libros</h3>
+    {% endif %}
+    {% endblock %}
+    </tbody>
+</table>

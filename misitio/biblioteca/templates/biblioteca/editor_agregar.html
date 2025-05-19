@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="alert-alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+<h2>Agregar Editor</h2>
+
+{% if form.errors %}
+<p class="errorlist">Por favor,Corrige los siguientes datos :</p>
+{% endif %}
+
+<form action="" method="post" novalidate>
+    {% csrf_token %}
+    <div class="field">
+    {{ form.nombre.errors }}
+    <label for="id_nombre_editor">Nombre:</label>
+        {{ form.nombre }}
+    </div>
+    <div class="field">
+    {{ form.domicilio.errors }}
+    <label for="id_domicilio">Domicilio:</label>
+        {{ form.domicilio }}
+    </div>
+    <div class="field">
+    {{ form.ciudad.errors }}
+    <label for="id_ciudad">Ciudad:</label>
+        {{ form.ciudad }}
+    </div>
+    <div class="field">
+    {{ form.estado.errors }}
+    <label for="id_estado">Estado:</label>
+        {{ form.estado }}
+    </div>
+    <div class="field">
+    {{ form.pais.errors }}
+    <label for="id_pais">Pais:</label>
+        {{ form.pais }}
+    </div>
+    <div class="field">
+    {{ form.website.errors }}
+    <label for="id_website">Sitio web:</label>
+        {{ form.website }}
+    </div>
+<input type="submit" value="Enviar">
+</form>
+{% endblock %}
